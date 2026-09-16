@@ -180,6 +180,16 @@
       </div>
       <div class="doc-row">
         <div class="field">
+          <label>Placa del vehículo</label>
+          <input type="text" id="f-placa">
+        </div>
+        <div class="field">
+          <label>Referencia del vehículo</label>
+          <input type="text" id="f-vehiculo-ref" placeholder="Marca / modelo / color">
+        </div>
+      </div>
+      <div class="doc-row">
+        <div class="field">
           <label>Documento (frente)</label>
           <label class="upload-box" id="doc-frente-box">
             <span class="corner-tl"></span><span class="corner-tr"></span><span class="corner-bl"></span><span class="corner-br"></span>
@@ -451,6 +461,16 @@ function addAcompanante(){
     </div>
     <div class="doc-row">
       <div class="field">
+        <label>Placa del vehículo</label>
+        <input type="text" class="acomp-placa">
+      </div>
+      <div class="field">
+        <label>Referencia del vehículo</label>
+        <input type="text" class="acomp-vehiculo-ref" placeholder="Marca / modelo / color">
+      </div>
+    </div>
+    <div class="doc-row">
+      <div class="field">
         <label>Documento (frente)</label>
         <label class="upload-box">
           <span class="corner-tl"></span><span class="corner-tr"></span><span class="corner-bl"></span><span class="corner-br"></span>
@@ -577,15 +597,19 @@ document.getElementById('submit-email').addEventListener('click', async () => {
       const nom = b.querySelector('.acomp-nombre').value;
       if(nom.trim() === '') continue;
       const tel = b.querySelector('.acomp-telefono').value;
+      const placa = b.querySelector('.acomp-placa').value;
+      const vehiculoRef = b.querySelector('.acomp-vehiculo-ref').value;
       const fBlob = b.acompDocFrente ? await compressImage(b.acompDocFrente) : null;
       const rBlob = b.acompDocReverso ? await compressImage(b.acompDocReverso) : null;
-      acompanantes.push({ nombre: nom, telefono: tel, docFrente: fBlob, docReverso: rBlob });
+      acompanantes.push({ nombre: nom, telefono: tel, placa: placa, vehiculoRef: vehiculoRef, docFrente: fBlob, docReverso: rBlob });
     }
 
     const payload = {
       propiedad: CONFIG.PROPIEDAD,
       nombre: document.getElementById('f-nombre').value,
       telefono: document.getElementById('f-telefono').value,
+      placa: document.getElementById('f-placa').value,
+      vehiculoRef: document.getElementById('f-vehiculo-ref').value,
       docFrente: docFrenteB64,
       docReverso: docReversoB64,
       acompanantes: acompanantes
